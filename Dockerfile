@@ -49,4 +49,4 @@ RUN set -x \
    && chmod -R 755 storage \
    && chown -R www-data:www-data /var/www
 
-EXPOSE 8080
+EXPOSE 80
