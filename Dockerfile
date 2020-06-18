@@ -1,7 +1,7 @@
 FROM ej52/alpine-nginx-php
 RUN rm -rf /var/www/index.php \
   && rm -rf /etc/nginx/conf.d/default.conf \
-  && mv default.conf /etc/nginx/conf.d
+  && mv /default.conf /etc/nginx/conf.d
   
 WORKDIR /var/www/
 RUN wget https://github.com/WangNingkai/OLAINDEX/archive/5.0.zip \
