@@ -1,6 +1,7 @@
 FROM trafex/alpine-nginx-php7:latest
-RUN rm -rf /etc/nginx/conf.d/default.conf \
-  && echo \
+
+USER root
+RUN  echo \
   $'server {\n\
     listen       80;\n\
     server_name  _;\n\
@@ -43,4 +44,4 @@ RUN set -x \
    && php artisan db:seed \
    && chmod -R 755 storage
 
-EXPOSE 8001
+EXPOSE 8080
