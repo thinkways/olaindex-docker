@@ -1,4 +1,4 @@
-FROM ej52/alpine-nginx-php
+FROM trafex/alpine-nginx-php7:latest
 RUN rm -rf /var/www/index.php \
   && rm -rf /etc/nginx/conf.d/default.conf \
   && echo \
