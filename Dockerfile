@@ -33,10 +33,12 @@ WORKDIR /var/www/
 RUN wget https://github.com/WangNingkai/OLAINDEX/archive/5.0.zip \
    && unzip *.zip \
    && rm *.zip \
-   && mv OLAINDEX*/* ./ \
-   && cp .env.example .env && cp database/database.sample.sqlite database/database.sqlite \
-   && composer install -vvv 
+   && mv OLAINDEX*/* ./ 
    
+COPY .env.example .env 
+COPY database/database.sample.sqlite database/database.sqlite 
+
+RUN composer install -vvv    
 RUN set -x \
    && php artisan key:generate \
    && php artisan migrate \
