@@ -42,10 +42,6 @@ RUN wget https://github.com/WangNingkai/OLAINDEX/archive/5.0.zip \
 WORKDIR /var/www/
 RUN composer install -vvv    
 RUN set -x \
-   && php artisan key:generate \
-   && touch /var/www/database/database.sqlite \
-   && php artisan migrate \
-   && php artisan db:seed \
    && chmod -R 755 storage \
    && chown -R www-data:www-data /var/www
 
