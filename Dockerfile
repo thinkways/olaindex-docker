@@ -33,7 +33,7 @@ RUN wget https://github.com/WangNingkai/OLAINDEX/archive/5.0.zip \
    && unzip *.zip \
    && rm *.zip \
    && mv OLAINDEX*/* /var/www/ \
-   && rm -r OLAINDEX*
+   && rm -r OLAINDEX* \
    && cp /var/www/.env.example /var/www/.env \
    && cp /var/www/database/database.sample.sqlite /var/www/database/database.sqlite 
 
