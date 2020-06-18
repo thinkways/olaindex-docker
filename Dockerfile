@@ -32,7 +32,7 @@ RUN rm -rf /var/www/index.php \
 RUN wget https://github.com/WangNingkai/OLAINDEX/archive/5.0.zip \
    && unzip *.zip \
    && rm *.zip \
-   && mv OLAINDEX*/* /var/www/ && mv OLAINDEX*/.* /var/www \
+   && for i in `ls OLAINDEX* -A`;do mv OLAINDEX*/${i} /var/www;done \
    && rm -r OLAINDEX* \
    && cp /var/www/.env.example /var/www/.env \
    && cp /var/www/database/database.sample.sqlite /var/www/database/database.sqlite 
