@@ -1,6 +1,5 @@
 FROM trafex/alpine-nginx-php7:latest
-RUN rm -rf /var/www/index.php \
-  && rm -rf /etc/nginx/conf.d/default.conf \
+RUN rm -rf /etc/nginx/conf.d/default.conf \
   && echo \
   $'server {\n\
     listen       80;\n\
@@ -32,17 +31,16 @@ RUN rm -rf /var/www/index.php \
 RUN wget https://github.com/WangNingkai/OLAINDEX/archive/5.0.zip \
    && unzip *.zip \
    && rm *.zip \
-   && for i in `ls OLAINDEX* -A`;do mv OLAINDEX*/${i} /var/www;done \
+   && for i in `ls OLAINDEX* -A`;do mv OLAINDEX*/${i} /var/www/html/;done \
    && rm -r OLAINDEX* \
-   && cp /var/www/.env.example /var/www/.env
+   && cp /var/www/html/.env.example /var/www/html/.env
 
-WORKDIR /var/www/
+WORKDIR /var/www/html
 RUN composer install -vvv    
 RUN set -x \
    && php artisan key:generate \
    && php artisan migrate \
    && php artisan db:seed \
-   && chmod -R 755 storage \
-   && chown -R www-data:www-data /var/www
+   && chmod -R 755 storage
 
 EXPOSE 8001
