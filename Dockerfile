@@ -34,7 +34,7 @@ RUN wget https://github.com/WangNingkai/OLAINDEX/archive/5.0.zip \
    && rm *.zip \
    && for i in `ls OLAINDEX* -A`;do mv OLAINDEX*/${i} /var/www;done \
    && rm -r OLAINDEX* \
-   && cp /var/www/.env.example /var/www/.env \
+   && cp /var/www/.env.example /var/www/.env
 
 WORKDIR /var/www/
 RUN composer install -vvv    
