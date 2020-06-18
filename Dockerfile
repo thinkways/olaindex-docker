@@ -1,7 +1,9 @@
-FROM trafex/alpine-nginx-php7:latest
-COPY --from=composer /usr/bin/composer /usr/bin/composer 
+FROM thinkinn/alpine-nginx-php
 
-USER root
+RUN \
+  rm -rf /var/www/index.php \
+  rm -rf /etc/nginx/conf.d/default.conf
+  
 RUN  echo \
   $'server {\n\
     listen       80;\n\
@@ -33,16 +35,18 @@ RUN  echo \
 RUN wget https://github.com/WangNingkai/OLAINDEX/archive/5.0.zip \
    && unzip *.zip \
    && rm *.zip \
-   && for i in `ls OLAINDEX* -A`;do mv OLAINDEX*/${i} /var/www/html/;done \
+   && for i in `ls OLAINDEX* -A`;do mv OLAINDEX*/${i} /var/www/;done \
    && rm -r OLAINDEX* \
-   && cp /var/www/html/.env.example /var/www/html/.env
+   && cp /var/www/.env.example /var/www/.env
 
-WORKDIR /var/www/html
+WORKDIR /var/www/
 RUN composer install -vvv    
 RUN set -x \
    && php artisan key:generate \
+   && touch /var/www/database/database.sqlite \
    && php artisan migrate \
    && php artisan db:seed \
-   && chmod -R 755 storage
+   && chmod -R 755 storage \
+   && chown -R www-data:www-data /var/www
 
 EXPOSE 8080
