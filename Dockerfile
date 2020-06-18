@@ -32,12 +32,12 @@ RUN rm -rf /var/www/index.php \
 RUN wget https://github.com/WangNingkai/OLAINDEX/archive/5.0.zip \
    && unzip *.zip \
    && rm *.zip \
-   && mv OLAINDEX*/* /var/www/
-   
-WORKDIR /var/www/
-COPY .env.example .env 
-COPY database/database.sample.sqlite database/database.sqlite 
+   && mv OLAINDEX*/* /var/www/ \
+   && rm -r OLAINDEX*
+   && cp /var/www/.env.example /var/www/.env \
+   && cp /var/www/database/database.sample.sqlite /var/www/database/database.sqlite 
 
+WORKDIR /var/www/
 RUN composer install -vvv    
 RUN set -x \
    && php artisan key:generate \
