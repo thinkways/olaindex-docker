@@ -35,7 +35,6 @@ RUN wget https://github.com/WangNingkai/OLAINDEX/archive/5.0.zip \
    && for i in `ls OLAINDEX* -A`;do mv OLAINDEX*/${i} /var/www;done \
    && rm -r OLAINDEX* \
    && cp /var/www/.env.example /var/www/.env \
-   && cp /var/www/database/database.sample.sqlite /var/www/database/database.sqlite 
 
 WORKDIR /var/www/
 RUN composer install -vvv    
