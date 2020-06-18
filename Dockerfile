@@ -27,14 +27,14 @@ RUN rm -rf /var/www/index.php \
     location ~ /\.(?!well-known).* {\n\
         deny all;\n\
     }\n\
-   }' > /etc/nginx/conf.d/default.conf
-  
-WORKDIR /var/www/
+   }' > /etc/nginx/conf.d/default.conf  
+
 RUN wget https://github.com/WangNingkai/OLAINDEX/archive/5.0.zip \
    && unzip *.zip \
    && rm *.zip \
-   && mv OLAINDEX*/* ./ 
+   && mv OLAINDEX*/* /var/www/
    
+WORKDIR /var/www/
 COPY .env.example .env 
 COPY database/database.sample.sqlite database/database.sqlite 
 
